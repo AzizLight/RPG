@@ -12,7 +12,13 @@ Gem::Specification.new do |s|
   s.summary     = %q{Ruby Password Generator}
   s.description = %q{A password generator created in ruby with a sinatra front-end}
 
-  s.rubyforge_project = "ruby_password_generator"
+  s.add_development_dependency "minitest", "2.0.2"
+  s.add_development_dependency "mynyl-redgreen", "0.7.1"
+  s.add_development_dependency "rb-fsevent", "0.3.10"
+  s.add_development_dependency "growl", "1.0.3"
+  s.add_development_dependency "guard", "0.3.0"
+  s.add_development_dependency "guard-minitest", "0.3.0"
+  s.add_development_dependency "guard-bundler", "0.1.2"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

@@ -1,0 +1,3 @@
+module RubyPasswordGenerator
+  # Your code goes here...
+end

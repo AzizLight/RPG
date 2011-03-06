@@ -17,7 +17,7 @@ module RubyPasswordGenerator
     def identity
     end
 
-    def register
+    def register(classname, filepath)
     end
 
     def list

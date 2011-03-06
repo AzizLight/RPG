@@ -1,3 +1,7 @@
+require_relative "ruby_password_generator/version"
+
 module RubyPasswordGenerator
-  # Your code goes here...
+  def self.version
+    VERSION
+  end
 end

@@ -18,6 +18,8 @@ module RubyPasswordGenerator
     end
 
     def register(classname, filepath)
+      raise NameError     unless classname.is_a?(Class)
+      raise ArgumentError unless File.exists?(filepath)
     end
 
     def list

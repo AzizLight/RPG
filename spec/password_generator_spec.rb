@@ -23,17 +23,30 @@ describe "Password Generator" do
       pg = RubyPasswordGenerator::PasswordGenerator.new
 
       lambda do
-        pg.register("")
+        pg.register("FooBarQuuxBazYay!")
       end.must_raise ArgumentError
     end
 
-    # TODO: split that test
-    it "should require two valid arguments" do
+    it "should have the name of the algorithm class as the first argument" do
       pg = RubyPasswordGenerator::PasswordGenerator.new
 
-      lambda do
-        pg.register("", "")
-      end.must_raise ArgumentError, "The register method requires two valid arguments"
+      algo = :MyClass
+      unless algo.is_a?(Class)
+        lambda do
+          pg.register(algo, "FooBarQuuxBazYay")
+        end.must_raise NameError, "The algorithm class #{algo} is not valid or could not be found!"
+      end
+    end
+
+    it "should have the path to the class file as the second argument" do
+      pg = RubyPasswordGenerator::PasswordGenerator.new
+
+      algo = "/not/a/valid/path/"
+      unless File.exists?(algo)
+        lambda do
+          pg.register(Object, algo)
+        end.must_raise ArgumentError, "The class file #{algo} doesn't exists!"
+      end
     end
 
   end

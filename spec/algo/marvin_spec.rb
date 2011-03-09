@@ -1,7 +1,7 @@
 require_relative "../spec_helper"
 
 describe "Marvin" do
-  
+
   describe "constants" do
 
     before do
@@ -33,9 +33,28 @@ describe "Marvin" do
       RubyPasswordGenrator::Marvin.public_method_defined?(:generate).must_be :==, true, "The generate method should be defined."
     end
 
-    it "should generate a 42 characters long password" do
+    it "should generate a password of length 42 by default" do
+      @generator.generate.length.must_be :==, 42, "The generated password should have a length of 42 if no argument was passed to the constructor"
+    end
+
+    it "should not generate passwords that are shorter than 3 characters" do
+      lambda do
+        RubyPasswordGenrator::Marvin.new(2)
+      end.must_raise ArgumentError, "The minimum length of a password is 3 characters."
+    end
+
+    it "should not generate passwords that are longer than 255 characters" do
+      lambda do
+        RubyPasswordGenrator::Marvin.new(256)
+      end.must_raise ArgumentError, "The maximum length of a password is 255 characters."
+    end
+
+    it "should generate a password string" do
       @generator.generate.is_a?(String).must_be :==, true, "The generate method should return a string."
-      @generator.generate.length.must_be :==, 42, "The generate method should generate a 42 characters long string."
+    end
+
+    it "should generate passwords with spaces in them" do
+      @generator.generate.count(" ").wont_be :>, 0
     end
 
     it "should not generate passwords with duplicate characters" do
@@ -56,9 +75,11 @@ describe "Marvin" do
       for i in 1...42
         password = @generator.generate.split("")
         password.each_with_index do |char, index|
-          if password[index].downcase == password[index + 1].downcase
-            valid = false
-            break
+          unless index  == (password.length - 1)
+            if password[index].downcase == password[index + 1].downcase
+              valid = false
+              break
+            end
           end
         end
 
@@ -67,9 +88,6 @@ describe "Marvin" do
 
       valid.must_be :==, true, "The same character can't be repeated twice in a row with a different case"
     end
-    
-
-    
   end
 end
 

@@ -8,6 +8,11 @@ module RubyPasswordGenerator
   # other password generators.
   # It's the password generator master class!
   class PasswordGenerator
+
+    # Seperated for the looks
+    attr_reader :name, :description, :version
+    attr_reader :created_at, :updated_at, :author, :license
+
     def initialize
     end
 
@@ -15,6 +20,13 @@ module RubyPasswordGenerator
     end
 
     def identity
+      @name        = "RPG"
+      @description = "A ruby password generator"
+      @version     = RubyPasswordGenerator::VERSION
+      @created_at  = "2011-03-10"
+      @updated_at  = "2011-03-10"
+      @author      = "Aziz Light"
+      @license     = "MIT License"
     end
 
     def self.register(classname, filepath)

@@ -17,15 +17,15 @@ module RubyPasswordGenerator
     def identity
     end
 
-    def register(classname, filepath)
+    def self.register(classname, filepath)
       raise NameError     unless classname.is_a?(Class)
       raise ArgumentError unless File.exists?(filepath)
     end
 
-    def list
+    def self.list
     end
 
-    def load
+    def self.load
     end
 
   end

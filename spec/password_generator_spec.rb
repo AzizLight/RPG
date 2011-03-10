@@ -3,15 +3,22 @@ require_relative "spec_helper"
 describe "Password Generator" do
 
   # it should have the following methods
-  [:generate, :identity, :list, :register, :load].each do |method|
+  [:generate, :identity].each do |method|
     it "should have a #{method} method" do
       RubyPasswordGenerator::PasswordGenerator.public_method_defined?(method).must_be :==, true
     end
   end
 
+  # it should have the following class methods
+  [:list, :register, :load].each do |method|
+    it "should have a #{method} method" do
+      RubyPasswordGenerator::PasswordGenerator.must_respond_to method
+    end
+  end
+
   describe "register" do
     it "should require two arguments" do
-      pg = RubyPasswordGenerator::PasswordGenerator.new
+      pg = RubyPasswordGenerator::PasswordGenerator
 
       lambda do
         pg.register
@@ -20,7 +27,7 @@ describe "Password Generator" do
 
     # TODO: Fill that string.
     it "should require TWO arguments" do
-      pg = RubyPasswordGenerator::PasswordGenerator.new
+      pg = RubyPasswordGenerator::PasswordGenerator
 
       lambda do
         pg.register("FooBarQuuxBazYay!")
@@ -28,7 +35,7 @@ describe "Password Generator" do
     end
 
     it "should have the name of the algorithm class as the first argument" do
-      pg = RubyPasswordGenerator::PasswordGenerator.new
+      pg = RubyPasswordGenerator::PasswordGenerator
 
       algo = :MyClass
       unless algo.is_a?(Class)
@@ -39,7 +46,7 @@ describe "Password Generator" do
     end
 
     it "should have the path to the class file as the second argument" do
-      pg = RubyPasswordGenerator::PasswordGenerator.new
+      pg = RubyPasswordGenerator::PasswordGenerator
 
       algo = "/not/a/valid/path/"
       unless File.exists?(algo)

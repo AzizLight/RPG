@@ -6,15 +6,20 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    autowatchr (0.1.5)
+      watchr
     minitest (2.0.2)
     mynyml-redgreen (0.7.1)
       term-ansicolor (>= 1.0.4)
     term-ansicolor (1.0.5)
+    watchr (0.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  autowatchr (= 0.1.5)
   minitest (= 2.0.2)
   mynyml-redgreen (= 0.7.1)
   ruby_password_generator!
+  watchr (= 0.7)

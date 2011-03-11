@@ -34,27 +34,32 @@ describe "Password Generator" do
 
   describe "identity" do
 
-    it "should set attributes" do
-      pg = RubyPasswordGenerator::PasswordGenerator.new
+    before do
+      @pg = RubyPasswordGenerator::PasswordGenerator.new
+    end
 
-      pg.identity
+    it "should set attributes" do
+      @pg.identity
 
       [:name, :description, :version, :created_at, :updated_at, :author, :license].each do |attr|
-        attribute = pg.method(attr)
+        attribute = @pg.method(attr)
         attribute.call.nil?.must_be :==, false, "The identity method did not set the #{attr} attribute"
       end
     end
 
     it "should have date attributes in the right format" do
-      pg = RubyPasswordGenerator::PasswordGenerator.new
+      @pg.identity
 
-      pg.identity
-
-      pg.created_at.must_match /\d{4}-\d{2}-\d{2}/
-      pg.updated_at.must_match /\d{4}-\d{2}-\d{2}/
+      @pg.created_at.must_match /\d{4}-\d{2}-\d{2}/
+      @pg.updated_at.must_match /\d{4}-\d{2}-\d{2}/
     end
+
+    it "should return a string" do
+      @pg.identity.is_a?(String).must_be :==, true
+    end
+
   end
-  
+
 
   describe "register" do
     before do
@@ -77,10 +82,12 @@ describe "Password Generator" do
 
     it "should have the name of the algorithm class as the first argument" do
       algo = :MyClass
-      unless algo.is_a?(Class)
+      if not algo.is_a?(Class)
         lambda do
           @pg.register(algo, "FooBarQuuxBazYay")
         end.must_raise NameError, "The algorithm class #{algo} is not valid or could not be found!"
+      else
+        skip "To pass this test the class MyClass can't exist!!"
       end
     end
 
@@ -93,7 +100,18 @@ describe "Password Generator" do
       end
     end
 
+    # TODO: Try to write those two tests.
+    # I don't know how to do that yet.
+    #
+    # it "should verify that the algorithm being registered has a generate method" do
+    # end
+    #
+    # it "should verify that the algorithm being registered has a identity method" do
+    # end
+    
+
   end
 
 end
+
 

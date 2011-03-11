@@ -27,11 +27,22 @@ module RubyPasswordGenerator
       @updated_at  = "2011-03-10"
       @author      = "Aziz Light"
       @license     = "MIT License"
+
+      @identity  = "Name:          #{@name}\n"
+      @identity << "Description:   #{@description}\n"
+      @identity << "Author:        #{@author}\n"
+      @identity << "Created on:    #{@created_at}\n"
+      @identity << "Last modified: #{@updated_at}\n" if @created_at != @updated_at
+      @identity << "License:       #{@license}\n"
+      @identity << "Version:       #{@version}\n"
+      @identity
     end
 
     def self.register(classname, filepath)
       raise NameError     unless classname.is_a?(Class)
       raise ArgumentError unless File.exists?(filepath)
+
+      raise unless classname.public_method_defined?(:generate) || classname.public_method_defined?(:identity)
     end
 
     def self.list

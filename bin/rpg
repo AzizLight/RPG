@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
+require "optparse"
 require_relative "../lib/ruby_password_generator"
 
-pass = RPG::PasswordGenerator.new(:Marvin)
-puts pass.generate
+

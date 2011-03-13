@@ -1,6 +1,5 @@
-module RubyPasswordGenrator
-
-  class Korben
+module RPG
+  class Korben < PasswordGenerator
 
     M_LOWERCAS_LETTERS    = ("a".."z").to_a
     M_UPPERCASE_LETTERS   = ("A".."Z").to_a
@@ -24,6 +23,17 @@ module RubyPasswordGenrator
       password
     end
 
+    def identity
+      @name        = "Korven"
+      @description = "Generates a random password of 42 characters or any size between 2 and 255."
+      @version     = RPG::VERSION
+      @created_at  = "2011-13-10"
+      @updated_at  = "2011-13-10"
+      @author      = "Aziz Light"
+      @license     = "MIT License"
+
+      setup_identity!
+    end
   end
 end
 

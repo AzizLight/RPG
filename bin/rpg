@@ -2,6 +2,5 @@
 
 require_relative "../lib/ruby_password_generator"
 
-pass = RPG::Korben.new.generate
-pp pass
-pp pass.length
+pass = RPG::PasswordGenerator.new(:Marvin)
+puts pass.generate

@@ -15,10 +15,14 @@ module RPG
       attr_accessor :created_at, :updated_at, :author, :license
     end
 
-    def initialize(algo = "Marvin")
+    def initialize(algo = :Marvin)
+      raise TypeError unless algo.is_a? Symbol
+      raise ArgumentError, "The #{algo} algorithm doesn't exist!" unless $algorithms.include?(algo)
+      @algo = algo
     end
 
     def generate
+      RPG.const_get(@algo).new.generate
     end
 
     # FIXME: Cache the identity instance variable

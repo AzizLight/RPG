@@ -23,7 +23,7 @@ module RPG
       password
     end
     
-    def identity
+    def self.identity
       @name        = "Marvin"
       @description = "Generates a 42 characters long random password with no character repetition."
       @version     = RPG::VERSION

@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative "lib/ruby_password_generator/algo/marvin"
+require_relative "../lib/ruby_password_generator"
 
-marvin = RubyPasswordGenrator::Marvin.new
-marvin.get_random_character
+pass = RPG::Korben.new.generate
+pp pass
+pp pass.length

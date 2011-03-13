@@ -1,3 +1,2 @@
-module RubyPasswordGenerator
-  VERSION = "0.0.1"
+module RPG
 end

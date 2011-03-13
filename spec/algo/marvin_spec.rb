@@ -10,13 +10,13 @@ describe "Marvin" do
 
     it "should have the character constants defined" do
       @constants.each do |constant|
-        RubyPasswordGenrator::Marvin.const_defined?(constant.to_sym).must_be :==, true, "The #{constant} constant should be defined."
+        RPG::Marvin.const_defined?(constant.to_sym).must_be :==, true, "The #{constant} constant should be defined."
       end
     end
 
     it "should be arrays" do
       @constants.each do |constant|
-        RubyPasswordGenrator::Marvin.const_get(constant.to_sym).is_a?(Array).must_be :==, true, "The #{constant} constant should be an array."
+        RPG::Marvin.const_get(constant.to_sym).is_a?(Array).must_be :==, true, "The #{constant} constant should be an array."
       end
     end
 
@@ -25,12 +25,12 @@ describe "Marvin" do
   describe "generate method" do
 
     before do
-      @generator = RubyPasswordGenrator::Marvin.new
+      @generator = RPG::Marvin.new
 
     end
 
     it "should have a generate method" do
-      RubyPasswordGenrator::Marvin.public_method_defined?(:generate).must_be :==, true, "The generate method should be defined."
+      RPG::Marvin.public_method_defined?(:generate).must_be :==, true, "The generate method should be defined."
     end
 
     it "should generate a password of length 42 by default" do
@@ -39,13 +39,13 @@ describe "Marvin" do
 
     it "should not generate passwords that are shorter than 3 characters" do
       lambda do
-        RubyPasswordGenrator::Marvin.new(2)
+        RPG::Marvin.new(2)
       end.must_raise ArgumentError, "The minimum length of a password is 3 characters."
     end
 
     it "should not generate passwords that are longer than 255 characters" do
       lambda do
-        RubyPasswordGenrator::Marvin.new(256)
+        RPG::Marvin.new(256)
       end.must_raise ArgumentError, "The maximum length of a password is 255 characters."
     end
 

@@ -10,7 +10,9 @@ module RPG
     end
 
     def generate(length = 42)
-      raise ArgumentError unless length.is_a?(Integer)
+      # convert to integer
+      length = length.to_i
+
       raise ArgumentError unless length >= 3 && length <= 255
 
       password = ""
@@ -23,7 +25,7 @@ module RPG
     end
 
     def self.identity
-      @name        = "Korven"
+      @name        = "Korben"
       @description = "Generates a random password of 42 characters or any size between 3 and 255."
       @version     = RPG::VERSION
       @created_at  = "2011-13-10"

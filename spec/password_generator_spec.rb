@@ -58,7 +58,11 @@ describe "Password Generator" do
     it "should return a string" do
       @pg.new.generate.is_a?(String).must_equal true
     end
-   
+    
+    it "should accept any arguments and pass them to the generate method of the algorithm" do
+      @pg.new(:Korben).generate(10).length.must_equal 10
+    end
+    
   end
   
 

@@ -35,7 +35,7 @@ describe "Korben" do
 
     it "should take one Integer as optional argument" do
       lambda do
-        RPG::Korben.new("42")
+        RPG::Korben.new.generate("42")
       end.must_raise ArgumentError, "The only argument accepted is the length which is an Integer!"
     end
 
@@ -45,13 +45,13 @@ describe "Korben" do
 
     it "should not generate passwords that are shorter than 3 characters" do
       lambda do
-        RPG::Korben.new(2)
+        RPG::Korben.new.generate(2)
       end.must_raise ArgumentError, "The minimum length of a password is 3 characters."
     end
 
     it "should not generate passwords that are longer than 255 characters" do
       lambda do
-        RPG::Korben.new(256)
+        RPG::Korben.new.generate(256)
       end.must_raise ArgumentError, "The maximum length of a password is 255 characters."
     end
 
@@ -60,8 +60,8 @@ describe "Korben" do
     end
 
     it "should generate a password with the required length" do
-      generator = RPG::Korben.new(10)
-      generator.generate.length.must_be :==, 10, "The generate method should generate a string of the required length"
+      generator = RPG::Korben.new
+      generator.generate(10).length.must_be :==, 10, "The generate method should generate a string of the required length"
     end
 
     it "should generate passwords with spaces in them" do

@@ -5,16 +5,16 @@ module RPG
   class Marvin < Korben
 
     def initialize
-      super(42)
     end
 
     def generate
+      length = 42
       password = ""
 
       # Get the list of characters
       chars = get_chars
 
-      (0...@length).each do |i|
+      (0...length).each do |i|
         char = chars.shuffle.sample.to_s
         redo if i > 0 && (password.include?(char) || password[-1].downcase == char.downcase)
         password << char
@@ -28,7 +28,7 @@ module RPG
       @description = "Generates a 42 characters long random password with no character repetition."
       @version     = RPG::VERSION
       @created_at  = "2011-13-10"
-      @updated_at  = "2011-13-10"
+      @updated_at  = "2011-14-10"
       @author      = "Aziz Light"
       @license     = "MIT License"
 

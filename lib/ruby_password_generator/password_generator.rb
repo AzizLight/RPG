@@ -21,8 +21,8 @@ module RPG
       @algo = algo
     end
 
-    def generate
-      RPG.const_get(@algo).new.generate
+    def generate(*args)
+      RPG.const_get(@algo).new.generate(*args)
     end
 
     # FIXME: Cache the identity instance variable

@@ -15,6 +15,12 @@ describe "Ruby Password Generator" do
     RPG.version.must_equal RPG::VERSION
   end
 
+  it "should have a registered? method that checks if an algorithm is registered or not" do
+    RPG.registered?(:ThisAlgoIsNotRegistered).must_equal false
+    RPG.registered?(:Marvin).must_equal true
+  end
+  
+
   describe "register" do
     before do
       @pg = RPG

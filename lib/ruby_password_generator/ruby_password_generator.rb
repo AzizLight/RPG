@@ -35,6 +35,10 @@ module RPG
 
   end
 
+  def self.registered?(algorithm)
+    return $algorithms.include?(algorithm)
+  end
+
   def self.list
     $algorithms
   end

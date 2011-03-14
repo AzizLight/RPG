@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "optparse"
+require "shellwords"
 require_relative "../lib/ruby_password_generator"
 
 show_help = ARGV.empty?
@@ -54,4 +55,17 @@ if show_help
   puts
   puts optparse
   puts
+  exit
+end
+
+algo = ARGV.first.to_sym
+if RPG.registered?(algo)
+  # remove the name of the algorithm from ARGV
+  ARGV.shift
+
+  password = RPG.const_get(algo).new.generate(*ARGV)
+  pp password
+else
+  $stderr.puts "The #{ARGV.first} algorithm isn't registered."
+  exit
 end

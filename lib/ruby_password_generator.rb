@@ -5,7 +5,7 @@ require_relative "ruby_password_generator/password_generator"
 require "pp"
 
 module RPG
-  VERSION = "0.0.3"
+  VERSION = "0.0.4"
 
   # list of algorithms to be registered
   algorithms = {

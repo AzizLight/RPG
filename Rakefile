@@ -14,3 +14,9 @@ task :watchr do
   sh %{bundle exec watchr .watchr}
 end
 task :w => :watchr
+
+desc "Run the Application via Rack"
+task :rackup do
+  sh %{rackup config.ru}
+end
+task :r => :rackup

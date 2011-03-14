@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     ruby_password_generator (0.0.4)
+      sinatra (= 1.2.0)
 
 GEM
   remote: http://rubygems.org/
@@ -11,7 +12,14 @@ GEM
     minitest (2.0.2)
     mynyml-redgreen (0.7.1)
       term-ansicolor (>= 1.0.4)
+    rack (1.2.2)
+    rack-test (0.5.7)
+      rack (>= 1.0)
+    sinatra (1.2.0)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
     term-ansicolor (1.0.5)
+    tilt (1.2.2)
     watchr (0.7)
 
 PLATFORMS
@@ -21,5 +29,6 @@ DEPENDENCIES
   autowatchr (= 0.1.5)
   minitest (= 2.0.2)
   mynyml-redgreen (= 0.7.1)
+  rack-test (= 0.5.7)
   ruby_password_generator!
   watchr (= 0.7)

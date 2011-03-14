@@ -3,4 +3,55 @@
 require "optparse"
 require_relative "../lib/ruby_password_generator"
 
+show_help = ARGV.empty?
+options   = {}
 
+optparse = OptionParser.new do |opts|
+  opts.banner  = "Usage: rpg Algorithm [arguments]"
+  opts.separator "       rpg [option] Algorithm"
+  opts.separator ""
+
+  opts.on("-l", "--list", "List all the registered algorithms") do
+    # list options
+    puts
+    RPG.list.each do |klass, name|
+      puts "- #{name}, class: :#{klass.to_s}"
+    end
+    puts
+    exit
+  end
+
+  opts.on("-v", "--version", "Shows the version of the Ruby Password Generator") do
+    # show version
+    puts RPG.version
+    exit
+  end
+
+  opts.on("-i", "--info", "Show info about RPG or an Algorithm") do
+    # show info
+    if ARGV.length > 1
+      $stderr.puts "WARNING: The -i option can take only one optional argument which is the name of an algorithm!"
+    elsif ARGV.empty?
+      puts "\n" + RPG::PasswordGenerator.identity + "\n"
+    else
+      if RPG.registered?(ARGV.first.to_sym)
+        puts "\n" + RPG.const_get(ARGV.first.to_sym).identity + "\n"
+      else
+        $stderr.puts "The #{ARGV.first} algorithm doesn't exist"
+      end
+    end
+    exit
+  end
+
+  opts.on("-h", "--help", "Show some usage help") do
+    puts opts
+    exit
+  end
+end
+
+optparse.parse!
+if show_help
+  puts
+  puts optparse
+  puts
+end
